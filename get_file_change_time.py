@@ -14,7 +14,6 @@ def is_leap_year (year) :
     return False 
 
 
-
 def number_to_str_date (year, number) :
   month_date = [] #= [-1, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365]
   # leap_month_date = [-1, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366]
@@ -57,10 +56,10 @@ def get_year (str_date) :
 
 
 def count_file_by_change_time (input_path, result_file) :
-  dirs = os.listdir (path)
+  dirs = os.listdir (input_path)
   count_date = {}
   for adir in dirs:
-    afile =  os.path.join (path, adir)
+    afile =  os.path.join (input_path, adir)
     if os.path.isfile (afile) == True:
       t_date = time.strftime ('%Y-%m-%d', time.gmtime (os.path.getmtime (afile)))
       t_time = time.strftime ('%H:%M:%S', time.gmtime (os.path.getmtime (afile)))
@@ -102,9 +101,11 @@ def count_file_by_change_time (input_path, result_file) :
 
 
 if __name__ == "__main__":
-  #use your own path
-  path = "D:\\documents\\C++\\C++language"
-  #use your own path
-  result_file = "C:\\Users\\xuewen\\Desktop\\res1.txt"
-  count_file_by_change_time (path, result_file)
+  config_file = open ("config.txt", "r")
+  input_path = config_file.readline ()
+  input_path = input_path.replace ("\n", "")
+  result_file = config_file.readline () 
+  result_file = result_file.replace ("\n", "")
+  config_file.close ()
+  count_file_by_change_time (input_path, result_file)
   
