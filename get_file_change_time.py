@@ -6,6 +6,7 @@ import os
 import sys
 import time
 import re
+import Tkinter
 
 def is_leap_year (year) :
   if  ( year % 400 == 0 ) or ( year % 100 != 0 and year % 4 == 0) :
@@ -99,13 +100,32 @@ def count_file_by_change_time (input_path, result_file) :
 
 
 
+    
+
 
 if __name__ == "__main__":
-  config_file = open ("config.txt", "r")
-  input_path = config_file.readline ()
-  input_path = input_path.replace ("\n", "")
-  result_file = config_file.readline () 
-  result_file = result_file.replace ("\n", "")
-  config_file.close ()
-  count_file_by_change_time (input_path, result_file)
+  # top = Tkinter.Tk()
+  # top.mainloop()
+  root = Tkinter.Tk ()
+  lb_title = Tkinter.Label (root,text='input path').pack ()
+  text1 = Tkinter.Entry (root, width = 30)
+  text1.pack ()
+  lb_title = Tkinter.Label (root,text='output path').pack ()
+  text2 = Tkinter.Entry (root, width = 30)
+  text2.pack ()
+  def start_click ():
+    count_file_by_change_time (text1.get(), text2.get())
+  def quit_click () :
+    exit ()
+  btn_start = Tkinter.Button(root, text = 'start', command = start_click ).pack (side = Tkinter.LEFT)
+  btn_quit = Tkinter.Button(root, text = 'quit', command = root.destroy ).pack (side = Tkinter.RIGHT)
+  root.mainloop()
+  # config_file = open ("config.txt", "r")
+  # input_path = config_file.readline ()
+  # input_path = input_path.replace ("\n", "")
+  # result_file = config_file.readline () 
+  # result_file = result_file.replace ("\n", "")
+  # config_file.close ()
+  # count_file_by_change_time (input_path, result_file)
+  
   
